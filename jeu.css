@@ -1,0 +1,65 @@
+body {
+    background-color: black;
+    margin: 0;
+
+    overflow-X: hidden;
+    overflow-Y: hidden;
+
+    --charachter_width: 2vw;
+}
+
+#columnCharacter {
+    display: flex;
+    align-items: flex-end;
+
+    /* background-color: blue; */
+
+    height: 100%;
+    width: var(--charachter_width);
+
+    left: 0;
+
+    position: absolute;
+}
+
+#character {
+    background-color: red;
+    display: flex;
+    position: relative;
+    bottom: 50%;
+    height: var(--charachter_width);
+}
+
+#map {
+    display: flex;
+    align-items: flex-end;
+    height: 100vh;
+    width: 100vw;
+}
+
+
+.block.one {
+    background-color: yellow;
+    width: 40vw;
+    height: 45vh;
+    margin-right: 5vw;
+}
+
+.two {
+    background-color: purple;
+    width: 30vw;
+    height: 30vh;
+}
+
+.test {
+    height: 100%;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: space-between;
+}
+
+.three {
+    background-color: blue;
+    width: 30vw;
+    height: 40vh;
+}
