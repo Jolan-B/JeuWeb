@@ -1,6 +1,6 @@
 # JeuWeb
 
-Bienvenue sur ce mini jeu web 2D!
+Bienvenue sur ce mini jeu web 2D !
 
 **Les touches pour se déplacer sont :**
 
