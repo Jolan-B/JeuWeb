@@ -63,3 +63,12 @@ body {
     width: 30vw;
     height: 40vh;
 }
+
+#endDoor {
+
+    position: absolute;
+    right: 0;
+    background-color: maroon;
+    width: calc(2 * var(--charachter_width));
+    height: calc(2 * var(--charachter_width));
+}

@@ -66,8 +66,6 @@ function actualPositionXOfCharacter() {
     // passe la valeur en px à en % de la taille de la page
     let characterXPosition = (parseFloat(window.getComputedStyle(charac).left) / windowWidth);
 
-    // console.log("Perso X ", characterXPosition);
-
     return characterXPosition
 }
 
@@ -88,11 +86,6 @@ function blocSousPerso() {
         // debut et fin du bloc en X en %
         let start = dim.left / windowWidth;
         let end = dim.right / windowWidth;
-
-        // console.log("Debut du bloc", start)
-        // console.log("Perso", characPosX + (columnCharacterWidth / windowWidth))
-        // console.log("Fin du bloc", end)
-
 
         // si le personnage n'est pas au dessus du bloc, on cherche le prochain bloc
         if (characPosX + (columnCharacterWidth / windowWidth) < start || characPosX > end) {
@@ -174,7 +167,8 @@ function left() {
 
     // position du perso en X et Y en %
     let actualX = actualPositionXOfCharacter();
-    let characYPos = actualPositionYOfCharacter();
+    let characFoot = actualPositionYOfCharacter();
+    let characHead = characFoot + parseFloat(window.getComputedStyle(document.getElementById("character")).height) / windowHeight;
 
     // position du perso potentiel apres un pas en %
     let newX = actualX - pas;
@@ -209,7 +203,7 @@ function left() {
             let topOfBloc = botOfBloc + dim.height / windowHeight;
 
             // si le perso se trouve entre le haut et la bas du bloc, on le colle au bloc en X
-            if (characYPos >= botOfBloc && characYPos < topOfBloc) {
+            if (characFoot <= topOfBloc && characHead >= botOfBloc) {
                 newX = endOfBloc + ordreDeGrandeurX;
 
                 document.getElementById("columnCharacter").style.left = `${newX * windowWidth}px`;
@@ -224,7 +218,8 @@ function right() {
 
     // position du perso en X et Y en %
     let actualX = actualPositionXOfCharacter();
-    let characYPos = actualPositionYOfCharacter();
+    let characFoot = actualPositionYOfCharacter();
+    let characHead = characFoot + parseFloat(window.getComputedStyle(document.getElementById("character")).height) / windowHeight;
 
     // Epaisseur du personnage en %
     let columnCharacter = document.getElementById("columnCharacter");
@@ -263,7 +258,7 @@ function right() {
             let topOfBloc = botOfBloc + dim.height / windowHeight;
 
             // si le perso se trouve entre le haut et la bas du bloc, on le colle au bloc en X
-            if (characYPos >= botOfBloc && characYPos < topOfBloc) {
+            if (characFoot <= topOfBloc && characHead >= botOfBloc) {
                 newX = startOfBloc - (columnCharacterWidth / windowWidth) - ordreDeGrandeurX;
 
                 document.getElementById("columnCharacter").style.left = `${newX * windowWidth}px`;
@@ -343,8 +338,45 @@ function jumpUp() {
 }
 
 
-// idée : le perso peut traverser les blocs d'une certaine couleur
-function jumpDown() { }
+
+
+// idée : le perso peut traverser les blocs d'une certaine couleur et se baisse
+// si il se trouve sur la porte de fin de niveau, il gagne
+function down() {
+    let door = window.getComputedStyle(document.getElementById("endDoor"));
+
+    // coordonnées de la porte de fin de niveau en %
+    let doorStart = parseFloat(door.left) / windowWidth;
+    let doorEnd = doorStart + parseFloat(door.width) / windowWidth;
+    let doorBot = parseFloat(door.bottom) / windowHeight;
+    let doorTop = doorBot + parseFloat(door.height) / windowHeight;
+
+    console.log("PORTE")
+    console.log("gauche", doorStart);
+    console.log("droite", doorEnd);
+    console.log("bas", doorBot);
+    console.log("haut", doorTop);
+
+
+
+
+
+
+    let actualXStart = actualPositionXOfCharacter();
+    let actualXEnd;
+    let actualFoot = actualPositionYOfCharacter();
+    let actualHead;
+
+    console.log("PERSONNAGE")
+    console.log(actualXStart)
+    console.log(actualFoot)
+
+}
+
+// pour relancer le niveau
+function retry() {
+    console.log("RETRY")
+}
 
 function move(event) {
 
@@ -357,6 +389,10 @@ function move(event) {
             break;
         case "ArrowUp":
             jumpUp();
+        case "ArrowDown":
+            down();
+        // case "r":
+        //     retry();
         default:
             return;
     }
