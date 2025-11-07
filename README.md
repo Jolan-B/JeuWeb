@@ -11,3 +11,7 @@ Bienvenue sur ce mini jeu web 2D !
 ↑ : sauter
 
 ↓ : pas encore implementé
+
+Amuse toi bien :)
+
+[Mini Jeu](https://jolan-b.github.io/JeuWeb/)
