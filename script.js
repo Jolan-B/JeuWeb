@@ -338,8 +338,6 @@ function jumpUp() {
 }
 
 
-
-
 // idée : le perso peut traverser les blocs d'une certaine couleur et se baisse
 // si il se trouve sur la porte de fin de niveau, il gagne
 function down() {
@@ -351,31 +349,21 @@ function down() {
     let doorBot = parseFloat(door.bottom) / windowHeight;
     let doorTop = doorBot + parseFloat(door.height) / windowHeight;
 
-    console.log("PORTE")
-    console.log("gauche", doorStart);
-    console.log("droite", doorEnd);
-    console.log("bas", doorBot);
-    console.log("haut", doorTop);
+    let characLeft = actualPositionXOfCharacter();
+    let characRight = characLeft + parseFloat(window.getComputedStyle(document.getElementById("character")).width) / windowWidth;
+    let characFoot = actualPositionYOfCharacter();
+    let characHead = characFoot + parseFloat(window.getComputedStyle(document.getElementById("character")).height) / windowHeight;
 
-
-
-
-
-
-    let actualXStart = actualPositionXOfCharacter();
-    let actualXEnd;
-    let actualFoot = actualPositionYOfCharacter();
-    let actualHead;
-
-    console.log("PERSONNAGE")
-    console.log(actualXStart)
-    console.log(actualFoot)
+    // si le perso est au niveau de la porte en X et en Y
+    if (characLeft <= doorEnd && characRight >= doorStart && characFoot <= doorTop && characHead >= doorBot) {
+        console.log("GAGNÉ !");
+    }
 
 }
 
 // pour relancer le niveau
 function retry() {
-    console.log("RETRY")
+    location.reload();
 }
 
 function move(event) {
@@ -389,10 +377,13 @@ function move(event) {
             break;
         case "ArrowUp":
             jumpUp();
+            break;
         case "ArrowDown":
             down();
-        // case "r":
-        //     retry();
+            break;
+        case "r":
+            retry();
+            break;
         default:
             return;
     }
